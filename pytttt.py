@@ -7,7 +7,7 @@ d = tuple(c)
 
 print(c)
 print(d)
-
+for x in range()
 summes = sum(c)                 
 avg = mean(c)
 
