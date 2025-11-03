@@ -1,36 +1,9 @@
-from statistics import mean
 
-sum_input = input()
-ans = sum_input.split()
-valid = []
+my_list = [9, 0, 6, 8, 6, 7, 7, 8, 7, 7]
+count=0
 
-# convert safely to float
-for x in ans:
-    try:
-        valid.append(float(x))
-    except ValueError:
-        print("Skipping invalid input:", x)
-
-ans = valid
-ans1 = tuple(ans)
-
-print(ans)
-print(ans1)
-
-if len(ans) > 0:
-    summes = sum(ans)
-    avg = mean(ans)
-
-    print("Sum:", summes)
-    print("Average:", avg)
-
-    with open("pytttt.txt", "w") as outputfile:
-        outputfile.write(str(ans))
-        outputfile.write("\nSum: " + str(summes))
-        outputfile.write("\nAverage: " + str(avg))
-
-    with open("pytttt.txt", "r") as outputfile:
-        print("\nFile content:\n")
-        print(outputfile.read())
-else:
-    print("No valid numeric inputs found.")
+for digit in range(len(my_list)-1):
+    if my_list[digit]== my_list[digit+1]:
+        count+=1
+        
+print(count)
