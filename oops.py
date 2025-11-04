@@ -1,14 +1,14 @@
 
 Employees = []  
 class Employee:
-    def __init__(self,id,name,domain,salary):
+    def __init__(self,id,name,role,salary):
         self.id=id
         self.name=name
-        self.domain=domain
+        self.role=role
         self.salary=salary
         
-def add_employee(id, name, domain, salary):
-    employee = Employee(id,name,domain,salary)                
+def add_employee(id, name, role, salary):
+    employee = Employee(id,name,role,salary)                
     Employees.append(employee)
     print("Employee Added Successfully")
     print(Employees)
@@ -28,11 +28,11 @@ def update_employee():
 
     if index != -1:                                    
         name = input("Enter Updated name: ")
-        domain = input("Enter Updated domain: ")
+        role = input("Enter Updated role: ")
         salary = float(input("Enter Updated salary: "))  
 
         Employees[index]["name"] = name
-        Employees[index]["domain"] = domain
+        Employees[index]["role"] = role
         Employees[index]["salary"] = salary
 
         print("Employee details updated successfully...")
@@ -65,9 +65,9 @@ while True:
     if choice == "1":                                  
         id = int(input("Enter Employee Id: "))
         name = input("Enter Employee name: ")
-        domain = input("Enter Employee Domain: ")
+        role = input("Enter Employee role: ")
         salary = float(input("Enter Salary of the Employee: "))
-        add_employee(id, name, domain, salary)
+        add_employee(id, name, role, salary)
 
     elif choice == "2":
         id = int(input("Enter Employee Id: "))
@@ -83,4 +83,4 @@ while True:
         print("Thank You")
         break
     else:
-        print(" Invalid Choice.. Try Again")
+        print(" Invalid . Try Again")
