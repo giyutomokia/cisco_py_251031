@@ -1,6 +1,7 @@
-import server.repo as repo 
-
 from flask import Flask, request, jsonify 
+
+import server.repo as repo 
+from mailer.mail import send_gmail, to_address
 
 application = Flask(__name__)
 
@@ -34,8 +35,27 @@ def create_employee():
     employee = repo.Employee(name = form_employee['name'],
             job_title = form_employee['job_title'],
             salary = form_employee['salary'])
-    repo.add_employee(employee)
-    created_employee = repo.search_employee(employee.id)
+    
+    try:
+        repo.add_employee(employee)
+        created_employee = repo.search_employee(employee.id)
+    except repo.EmployeeAlreadyExistError as ex:
+        return jsonify({'error' : 'Server Error'}), 500
+    except repo.DatabaseError as ex:
+        return jsonify({'error' : 'Server Error'}), 500
+
+    #sending creation mail
+    subject = f'{created_employee.name} is created'
+    body = f'''ID : {created_employee.id}
+Name: {created_employee.name}
+Job Title: {created_employee.job_title}
+Salary : ${created_employee.salary}
+'''
+    send_gmail(to_address = to_address, 
+               subject = subject, 
+               body = body)
+    # log the mail sent info 
+    #end sending creation mail
     return jsonify(created_employee.to_dict()), 201
 
 @application.route('/employees/<emp_id>', methods = ['PUT'])
